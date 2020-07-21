@@ -1,4 +1,4 @@
-
+# by running this we can get html responses from the dummy api function on postman using get function.
 from flask import Flask
 
 
