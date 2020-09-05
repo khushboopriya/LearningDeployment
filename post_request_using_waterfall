@@ -1,0 +1,40 @@
+const express = require("express")
+var waterfall = require('async-waterfall');
+const app = express()
+
+app.get("/urltry",(req,res) =>{
+
+    res.setHeader('Content-Type','text/html');
+
+
+   waterfall([
+    myFirstFunction,
+    mySecondFunction,
+    myLastFunction,
+    ], function (err, result) {
+        // result now equals 'done'
+        res.write(result);
+        res.end();
+    });
+    function myFirstFunction(callback) {
+        res.write('<h1>hello people</h1>');
+        callback(null, 'you are awesome');
+    }
+    function mySecondFunction(arg1, callback) {
+        // arg1 now equals 'one' and arg2 now equals 'two'
+        res.write('<h1>'+arg1+'</h1>');
+        callback(null, 'Thankyou');
+    }
+    function myLastFunction(arg2, callback) {
+        // arg1 now equals 'three'
+        res.write('<h1>'+arg2+'</h1>');
+        callback(null, 'done');
+    }
+
+    
+})
+
+
+app.listen(12345,function(){
+    console.log("Server ")
+})
